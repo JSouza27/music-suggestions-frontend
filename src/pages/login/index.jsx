@@ -38,13 +38,14 @@ function Login() {
 
   const sendUser = () => {
     try {
-      validation();
+      // validation();
 
       const user = { email, password };
 
       login(user);
 
       toast.success('Bem vindo!');
+      navigate('/home');
     } catch (err) {
       toast.error(`Erro ao logar. ${err.message}`);
     }

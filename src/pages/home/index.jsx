@@ -2,9 +2,13 @@ import React, { useEffect, useState } from 'react';
 
 import apiOpenWeather from '../../services/open weather';
 import { apiSpotifyToken, apiSpotifyPlayList } from '../../services/spotify';
+import Card from './components/card';
+
+import SearchBar from './components/search bar';
+
+import { ContainerPlaylist, Title, InfoSpan, Wrapper } from './style';
 
 function Home() {
-  const [location, setLocation] = useState('');
   const [token, setToken] = useState('');
   const [list, setList] = useState([]);
 
@@ -36,31 +40,27 @@ function Home() {
       setList(response.playlists.items);
     }
   };
-
+  console.log(list);
   useEffect(() => {
     apiSpotifyToken().then((response) => setToken(response.access_token));
   }, []);
+
   return (
-    <>
-      <section>
-        <input
-          name="searchPlayList"
-          onChange={ (e) => setLocation(e.target.value) }
-          placeholder="Digite uma localidade"
-        />
-        <button
-          type="button"
-          onClick={ async () => { await getPlayList(location); } }
-        >
-          enviar
-        </button>
-      </section>
-      <section>
+    <Wrapper>
+      <SearchBar getPlayList={ getPlayList } />
+      <Title>Playlists Sugeridas</Title>
+      <ContainerPlaylist>
         {
-          list.map((item) => <span>{item.name}</span>)
+          list.length ? list.map((item, index) => (
+            <Card
+              key={ `${item.name}-${index}` }
+              url={ item.images[0].url }
+              name={ item.name }
+            />
+          )) : <InfoSpan>Digite uma localidade para obter as  playlists</InfoSpan>
         }
-      </section>
-    </>
+      </ContainerPlaylist>
+    </Wrapper>
   );
 }
 
