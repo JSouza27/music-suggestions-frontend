@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { login } from '../../services/api';
 
 import {
@@ -23,9 +24,30 @@ function Login() {
 
   const navigate = useNavigate();
 
+  const validation = () => {
+    const regexEmail = /^[a-z0-9.]+@[a-z0-9]+\.([a-z]+)?$/i;
+    const six = 6;
+
+    if (!email.length || email == null || !regexEmail.test(email)) {
+      throw new Error('Email inválido!');
+    }
+    if (!password.length || password == null || password.length < six) {
+      throw new Error('Senha inválida');
+    }
+  };
+
   const sendUser = () => {
-    const user = { email, password };
-    login(user);
+    try {
+      validation();
+
+      const user = { email, password };
+
+      login(user);
+
+      toast.success('Bem vindo!');
+    } catch (err) {
+      toast.error(`Erro ao logar. ${err.message}`);
+    }
   };
 
   return (
@@ -33,6 +55,7 @@ function Login() {
       <Container>
         <WelcomeTitle>Bem Vindo !</WelcomeTitle>
         <SubTitle>Faça seu login </SubTitle>
+
         <ContainerEmail>
           <Label>Email</Label>
           <Input
@@ -40,13 +63,16 @@ function Login() {
             placeholder="Entre com seu email"
           />
         </ContainerEmail>
+
         <ContainerPassword>
           <Label>Senha</Label>
           <Input
+            type="password"
             onChange={ (e) => setPassword(e.target.value) }
             placeholder="Entre com sua senha"
           />
         </ContainerPassword>
+
         <Button type="button" onClick={ () => sendUser() }>
           Entrar
         </Button>

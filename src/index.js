@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import './index.css';
+import { ToastContainer } from 'react-toastify';
 import App from './App';
+import './index.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.render(
   <BrowserRouter>
     <App />
+
+    <ToastContainer />
   </BrowserRouter>,
   document.getElementById('root'),
 );

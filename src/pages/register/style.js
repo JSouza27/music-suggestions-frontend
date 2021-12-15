@@ -4,7 +4,7 @@ export const Wrapper = styled.section`
   align-items: center;
   display: flex;
   justify-content: center;
-  height: 100vh;
+  height: 100%;
 `;
 
 export const Container = styled.section`
@@ -14,8 +14,8 @@ export const Container = styled.section`
   box-shadow: 0px 4px 64px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
-  height: 33.06rem;
   margin: 2rem 0;
+  min-height: 40.06rem;
   padding: 1.37rem;
   width: 20.25rem;
 
@@ -64,8 +64,16 @@ export const Input = styled.input`
   padding: 19px 0px 19px 17.8px;
 `;
 
+export const ContainerFirstName = styled(ContainerEmail)`
+  margin-top: 1.5rem;
+`;
+
+export const ContainerLastName = styled(ContainerEmail)`
+  margin-top: 1.5rem;
+`;
+
 export const ContainerPassword = styled(ContainerEmail)`
-  top: 20.62rem;
+  margin-top: 1.5rem;
 `;
 
 export const Button = styled.button`
@@ -73,31 +81,13 @@ export const Button = styled.button`
   border: none;
   border-radius: 6px;
   color: #fff;
+  cursor: pointer;
   font-size: 1rem;
   font-weight: 500;
   height: 3.56rem;
   line-height: 24px;
   margin-top: 2.93rem;
+  margin-bottom: 0.5rem;
   outline: none;
   width: 100%;
-`;
-
-export const ContainerRegister = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 2.12rem;
-`;
-
-export const RegisterSpan = styled.span`
-  color: #7D7D7D;
-  font-size: 0.75rem;
-  font-weight: 300;
-  line-height: 18px;
-  margin-right: 0.2rem;
-`;
-
-export const LinkRegister = styled(RegisterSpan)`
-  color: #000;
-  cursor: pointer;
-  font-weight: 600;
 `;
