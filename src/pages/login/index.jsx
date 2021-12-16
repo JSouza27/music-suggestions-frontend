@@ -36,16 +36,20 @@ function Login() {
     }
   };
 
-  const sendUser = () => {
+  const sendUser = async () => {
+    const statusCode = 200;
     try {
-      // validation();
+      validation();
 
       const user = { email, password };
 
-      login(user);
+      const returnServer = await login(user);
+      console.log(returnServer);
 
-      toast.success('Bem vindo!');
-      navigate('/home');
+      if (returnServer.status === statusCode) {
+        toast.success('Bem vindo!');
+        navigate('/home');
+      }
     } catch (err) {
       toast.error(`Erro ao logar. ${err.message}`);
     }

@@ -32,14 +32,14 @@ function Register() {
     if (!email.length || email == null || !regexEmail.test(email)) {
       throw new Error('Email inválido!');
     }
-    if (!password.length || password == null) {
-      throw new Error('Senha inválido!');
-    }
     if (!firstName.length || firstName == null) {
       throw new Error('Nome inválido!');
     }
-    if (!lastName.length || lastName == null || lastName.length < six) {
+    if (!lastName.length || lastName == null) {
       throw new Error('Sobrenome inválido!');
+    }
+    if (!password.length || password == null || password.length < six) {
+      throw new Error('Senha inválido!');
     }
   };
 
